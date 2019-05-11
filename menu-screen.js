@@ -5,6 +5,7 @@
 class MenuScreen {
   constructor() {
     // TODO(you): Implement the constructor and add fields as necessary.
+    var theme=['candy','charlie brown', 'computers', 'dance', 'donuts', 'hello kitty', 'flowers', 'nature', 'turtles', 'space'];
     fetch('https://fullstackccu.github.io/homeworks/hw4/songs.json')
     .then(function onResponse(response)
     {
@@ -15,13 +16,19 @@ class MenuScreen {
       //console.log(json.鹹豆漿.title);
       for(let i in json)
       {  
-        console.log(i);
+       // console.log(i);
         let node=document.createElement("option");
         let textnode=document.createTextNode(i);   
-        node.appendChild(textnode);  
+        node.appendChild(textnode);   
         document.querySelector('#song-selector').appendChild(node);
       }
     });
+    console.log(theme[Math.floor(Math.random()*10)]);
+    document.querySelector('#query-input').setAttribute("value",theme[Math.floor(Math.random()*10)]);
+    document.querySelector('#submit_btn').addEventListener('click',this.onClick);
   }
   // TODO(you): Add methods as necessary.
+  onClick(){
+    document.dispatchEvent(new CustomEvent('submit_btn'));
+  }
 }

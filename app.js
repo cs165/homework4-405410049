@@ -6,6 +6,13 @@ class App {
   constructor() {
     // TODO(you): Implement the constructor and add fields as necessary.
     this.menu=new MenuScreen();
+    document.addEventListener('submit_btn',this.submit_btn);
   }
   // TODO(you): Add methods as necessary.
+  submit_btn()
+  {
+    let x=document.querySelector('#menu');
+    console.log(x);
+    document.querySelector('#menu').style.display="none";
+  }
 }
