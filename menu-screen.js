@@ -4,15 +4,19 @@
 // See HW4 writeup for more hints and details.
 class MenuScreen {
   constructor() {
-    var theme=['candy','charlie brown', 'computers', 'dance', 'donuts', 'hello kitty', 'flowers', 'nature', 'turtles', 'space'];
+    this.song_url=new Object();
+    this.onReady=this.onReady.bind(this);
+    this.theme=['candy','charlie brown', 'computers', 'dance', 'donuts', 'hello kitty', 'flowers', 'nature', 'turtles', 'space'];
     fetch('https://fullstackccu.github.io/homeworks/hw4/songs.json')
-   .then(function onResponse(response)
+    .then(function onResponse(response)
     {
       return response.json();
     })
-    .then(function onReady(json)
-    {
-      let song_url=new Object();
+    .then(this.onReady);
+  }
+  // TODO(you): Add methods as necessary.
+  onReady(json)
+  {
       for(let i in json)
       {  
        // console.log(i);
@@ -20,13 +24,10 @@ class MenuScreen {
         let textnode=document.createTextNode(i);   
         node.appendChild(textnode);   
         document.querySelector('#song-selector').appendChild(node);
-        song_url[i]=json[i].songUrl;        
+        this.song_url[i]=json[i].songUrl;            
       }
-      document.dispatchEvent(new CustomEvent('return_song',{detail:song_url}));
-    });
-    const theme_val=theme[Math.floor(Math.random()*10)];
-    console.log(theme[Math.floor(Math.random()*10)]);
-    document.querySelector('#query-input').setAttribute("value",theme_val);
+      const theme_val=this.theme[Math.floor(Math.random()*10)];
+      document.querySelector('#query-input').setAttribute("value",theme_val);
+       //    document.dispatchEvent(new CustomEvent('return_song',{detail:song_url}));
   }
-  // TODO(you): Add methods as necessary.
-  }
+}
